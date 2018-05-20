@@ -57,7 +57,7 @@ export default {
   // name: 'LayoutName',
   data () {
     return {
-      leftDrawer: true
+      leftDrawer: false
     }
   }
 }

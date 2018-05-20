@@ -58,10 +58,15 @@ export default {
   methods: {
     signIn () {
       this.$v.form.$touch()
+
       if (this.$v.form.$error) {
-        this.$q.notify('Por favor preencha os campos corretamente.')
+        this.$q.notify({
+          message: 'Por favor preencha os campos corretamente.',
+          position: 'top-right'
+        })
         return
       }
+
       this.loading = true
       this.$auth.signInWithEmailAndPassword(this.form.email, this.form.password)
         .then(user => {
@@ -76,7 +81,7 @@ export default {
         .catch(err => {
           this.loading = false
           this.$q.notify('Ouve um problema')
-          console.log(err)
+          console.error(err)
         })
     }
   }

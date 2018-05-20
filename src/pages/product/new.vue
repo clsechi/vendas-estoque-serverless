@@ -13,6 +13,7 @@
         />
 
         <q-input
+          class="q-mt-md"
           v-model="form.code"
           @blur="$v.form.code.$touch"
           @keyup.enter="createProduct"
@@ -22,6 +23,7 @@
         />
 
         <q-input
+          class="q-mt-md"
           v-model="form.quantity"
           @blur="$v.form.quantity.$touch"
           @keyup.enter="createProduct"
@@ -31,6 +33,7 @@
         />
 
         <q-input
+          class="q-mt-md"
           v-model="form.description"
           @blur="$v.form.description.$touch"
           @keyup.enter="createProduct"
@@ -40,6 +43,7 @@
         />
 
         <q-select
+          class="q-mt-md"
           v-model="form.category"
           @blur="$v.form.category.$touch"
           @keyup.enter="createProduct"
@@ -50,6 +54,7 @@
         />
 
         <q-input
+          class="q-mt-md"
           v-model="form.material"
           @blur="$v.form.material.$touch"
           @keyup.enter="createProduct"
@@ -59,6 +64,7 @@
         />
 
         <q-input
+          class="q-mt-md"
           v-model="form.size"
           @blur="$v.form.size.$touch"
           @keyup.enter="createProduct"
@@ -68,6 +74,7 @@
         />
 
         <q-input
+          class="q-mt-md"
           v-model="form.color"
           @blur="$v.form.color.$touch"
           @keyup.enter="createProduct"
@@ -77,6 +84,7 @@
         />
 
         <q-input
+          class="q-mt-md"
           v-model="form.manufacturer"
           @blur="$v.form.manufacturer.$touch"
           @keyup.enter="createProduct"
@@ -86,6 +94,7 @@
         />
 
         <q-input
+          class="q-mt-md"
           v-model="form.cost_price"
           @blur="$v.form.cost_price.$touch"
           @keyup.enter="createProduct"
@@ -97,6 +106,7 @@
         />
 
         <q-input
+          class="q-mt-md"
           v-model="form.sell_price"
           @blur="$v.form.sell_price.$touch"
           @keyup.enter="createProduct"
@@ -107,18 +117,23 @@
           prefix="R$"
         />
 
-        <q-uploader
-          :url="url"
-          v-model="form.image"
-          type="text"
-          float-label="Imagem"
-        />
-
         <q-input
+          class="q-mt-md"
           v-model="form.obs"
           @keyup.enter="createProduct"
           type="textarea"
           float-label="Observações"
+        />
+
+        <q-uploader
+          class="q-mt-md"
+          :url="url"
+          v-model="form.image"
+          type="text"
+          float-label="Imagem"
+          :auto-expand="true"
+          @add="uploadImage"
+          ref="uploader"
         />
 
         <q-btn
@@ -188,7 +203,52 @@ export default {
 
   methods: {
     createProduct () {
-      alert('Produto Criado')
+      /* this.$v.form.$touch()
+
+      if (this.$v.form.$error) {
+        this.$q.notify({
+          message: 'Por favor preencha os campos corretamente.',
+          position: 'top-right'
+        })
+        return
+      } */
+
+      this.$firestore.collection('products').doc(this.form.code.toString()).set(this.form)
+        .then(docRef => {
+          this.$q.notify({
+            type: 'positive',
+            message: 'Produto criado com sucesso!',
+            color: 'positive',
+            position: 'top-right'
+          })
+        })
+        .catch(err => {
+          this.$q.notify({
+            message: 'Erro ao criar produto!.',
+            position: 'top-right'
+          })
+          console.error('Error adding document: ', err)
+        })
+    },
+
+    uploadImage () {
+      const file = this.$refs.uploader.files
+
+      console.log(file)
+
+      const metadata = { contentType: 'image/jpeg' }
+
+      this.$storage.ref().child(`images/' ${file.name}`).put(file, metadata)
+        .then(snapshot => {
+          snapshot.ref.getDownloadURL()
+            .then(downloadURL => {
+              console.log('File available at', downloadURL)
+            })
+          alert('arquivo enviado')
+        })
+        .catch(err => {
+          console.error('Error to send files', err)
+        })
     }
   }
 }
