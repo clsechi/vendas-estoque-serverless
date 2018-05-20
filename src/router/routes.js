@@ -5,7 +5,7 @@ export default [
     component: () => import('layouts/default'),
     children: [
       { path: '', component: () => import('pages/index') },
-      { path: '/login', component: () => import('pages/Login') }
+      { path: 'login', component: () => import('pages/Login') }
     ]
   },
 
@@ -13,7 +13,9 @@ export default [
     path: '/admin',
     component: () => import('layouts/admin'),
     children: [
-      { path: 'new', component: () => import('pages/product/new') }
+      { path: 'products', component: () => import('pages/product/index') },
+      { path: 'product/new', component: () => import('pages/product/new') },
+      { path: 'product/:id/show', component: () => import('pages/product/show') }
     ]
   },
 

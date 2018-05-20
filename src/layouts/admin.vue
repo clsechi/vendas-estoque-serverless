@@ -19,14 +19,14 @@
         <q-route-tab
           slot="title"
           icon="assignment"
-          to="/your/route"
+          to="/admin/products"
           replace
           label="Listar Produtos"
         />
         <q-route-tab
           slot="title"
           icon="library_add"
-          to="/admin/new"
+          to="/admin/product/new"
           replace
           label="Criar Produto"
         />

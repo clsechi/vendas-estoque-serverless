@@ -238,7 +238,7 @@ export default {
 
       const metadata = { contentType: 'image/jpeg' }
 
-      this.$storage.ref().child(`images/${Date.now.toString()}`).put(file, metadata)
+      this.$storage.ref().child(`images/${Date.now().toString()}`).put(file, metadata)
         .then(snapshot => {
           snapshot.ref.getDownloadURL()
             .then(downloadURL => {
