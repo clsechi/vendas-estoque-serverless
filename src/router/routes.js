@@ -9,6 +9,14 @@ export default [
     ]
   },
 
+  {
+    path: '/admin',
+    component: () => import('layouts/admin'),
+    children: [
+      { path: 'new', component: () => import('pages/product/new') }
+    ]
+  },
+
   { // Always leave this as last one
     path: '*',
     component: () => import('pages/404')

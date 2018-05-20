@@ -16,9 +16,8 @@
           <q-icon name="menu" />
         </q-btn>
 
-        <q-toolbar-title>
-          Quasar App
-          <div slot="subtitle">Running on Quasar v{{ $q.version }}</div>
+        <q-toolbar-title class="">
+          Estoque do Sechi
         </q-toolbar-title>
       </q-toolbar>
     </q-layout-header>
@@ -33,9 +32,9 @@
         inset-delimiter
       >
         <q-list-header>Essential Links</q-list-header>
-        <q-item @click.native="openURL('http://quasar-framework.org')">
+        <q-item @click.native="$router.push('/admin')">
           <q-item-side icon="school" />
-          <q-item-main label="Docs" sublabel="quasar-framework.org" />
+          <q-item-main label="Admin"/>
         </q-item>
         <q-item @click.native="openURL('https://github.com/quasarframework/')">
           <q-item-side icon="code" />
