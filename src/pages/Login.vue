@@ -7,7 +7,7 @@
           v-model="form.email"
           type="email"
           @blur="$v.form.email.$touch"
-          @keyup.enter="signin"
+          @keyup.enter="signIn"
           :error="$v.form.email.$error"
           float-label="Email"
         />
@@ -15,7 +15,7 @@
         <q-input
           v-model="form.password"
           @blur="$v.form.password.$touch"
-          @keyup.enter="signin"
+          @keyup.enter="signIn"
           :error="$v.form.password.$error"
           type="password"
           float-label="Senha"
@@ -63,10 +63,15 @@ export default {
         return
       }
       this.loading = true
-      this.$auth.signInWithEmailAndPassword(this.email, this.password)
+      this.$auth.signInWithEmailAndPassword(this.form.email, this.form.password)
         .then(user => {
           this.loading = false
-          this.$q.notify('Login efetuado com sucesso')
+          this.$q.notify({
+            type: 'positive',
+            message: 'Login efetuado com sucesso',
+            color: 'positive',
+            position: 'top-right'
+          })
         })
         .catch(err => {
           this.loading = false
