@@ -129,11 +129,13 @@
           class="q-mt-md"
           :url="url"
           v-model="form.image"
-          type="text"
+          type="file"
           float-label="Imagem"
           :auto-expand="true"
           @add="uploadImage"
           ref="uploader"
+          :hide-upload-button="true"
+          :hide-upload-progress="true"
         />
 
         <q-btn
@@ -166,7 +168,7 @@ export default {
         size: '',
         color: '',
         manufacturer: 'IMAB',
-        image: '',
+        imageURL: '',
         cost_price: '',
         sell_price: '',
         obs: ''
@@ -203,15 +205,15 @@ export default {
 
   methods: {
     createProduct () {
-      /* this.$v.form.$touch()
+      this.$v.form.$touch()
 
       if (this.$v.form.$error) {
         this.$q.notify({
           message: 'Por favor preencha os campos corretamente.',
-          position: 'top-right'
+          position: 'top'
         })
         return
-      } */
+      }
 
       this.$firestore.collection('products').doc(this.form.code.toString()).set(this.form)
         .then(docRef => {
@@ -219,34 +221,36 @@ export default {
             type: 'positive',
             message: 'Produto criado com sucesso!',
             color: 'positive',
-            position: 'top-right'
+            position: 'top'
           })
         })
         .catch(err => {
           this.$q.notify({
             message: 'Erro ao criar produto!.',
-            position: 'top-right'
+            position: 'top'
           })
           console.error('Error adding document: ', err)
         })
     },
 
     uploadImage () {
-      const file = this.$refs.uploader.files
-
-      console.log(file)
+      const file = this.$refs.uploader.files[0]
 
       const metadata = { contentType: 'image/jpeg' }
 
-      this.$storage.ref().child(`images/' ${file.name}`).put(file, metadata)
+      this.$storage.ref().child(`images/${Date.now.toString()}`).put(file, metadata)
         .then(snapshot => {
           snapshot.ref.getDownloadURL()
             .then(downloadURL => {
+              this.form.imageURL = downloadURL
               console.log('File available at', downloadURL)
             })
-          alert('arquivo enviado')
         })
         .catch(err => {
+          this.$q.notify({
+            message: 'Erro ao enviar imagem!.',
+            position: 'top'
+          })
           console.error('Error to send files', err)
         })
     }

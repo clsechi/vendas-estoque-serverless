@@ -62,7 +62,7 @@ export default {
       if (this.$v.form.$error) {
         this.$q.notify({
           message: 'Por favor preencha os campos corretamente.',
-          position: 'top-right'
+          position: 'top'
         })
         return
       }
@@ -75,7 +75,7 @@ export default {
             type: 'positive',
             message: 'Login efetuado com sucesso',
             color: 'positive',
-            position: 'top-right'
+            position: 'top'
           })
         })
         .catch(err => {
