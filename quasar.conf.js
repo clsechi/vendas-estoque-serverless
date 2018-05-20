@@ -3,7 +3,8 @@
 module.exports = function (ctx) {
   return {
     // app plugins (/src/plugins)
-    plugins: [
+    plugins: [ 'Firebase',
+      'vuelidate'
     ],
     css: [
       'app.styl'

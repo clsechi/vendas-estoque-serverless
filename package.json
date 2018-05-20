@@ -11,6 +11,8 @@
     "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
+    "firebase": "^5.0.3",
+    "vuelidate": "^0.6.2"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",
