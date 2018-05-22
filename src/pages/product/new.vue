@@ -177,11 +177,23 @@ export default {
       categories: [
         {
           label: 'Fechadura',
-          value: 'fechadura'
+          value: 'Fechadura'
         },
         {
           label: 'Trinco',
-          value: 'trinco'
+          value: 'Trinco'
+        },
+        {
+          label: 'Fecho',
+          value: 'Fecho'
+        },
+        {
+          label: 'Pivô',
+          value: 'Pivô'
+        },
+        {
+          label: 'Acessórios',
+          value: 'Acessórios'
         }
       ]
     }

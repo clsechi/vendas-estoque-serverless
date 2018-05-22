@@ -3,7 +3,8 @@
     <q-page padding class="docs-input row flex justify-center">
       <div class="col-xs-8 col-sm-8 col-md-8">
         <h3>Produtos Cadastrados</h3>
-        <ul class="list">
+        <p v-if="products.length === 0">Nenhum produto cadastrado!</p>
+        <ul v-else class="list">
           <li v-for="product in products" :key="product.code">
             <p>Nome: {{ product.name }}</p>
             <p>Código: {{ product.code }} </p>
