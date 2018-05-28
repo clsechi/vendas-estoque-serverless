@@ -15,7 +15,8 @@ export default [
     children: [
       { path: 'products', component: () => import('pages/product/index') },
       { path: 'product/new', component: () => import('pages/product/new') },
-      { path: 'product/:id/show', component: () => import('pages/product/show') }
+      { path: 'product/:id/show', name: 'show', component: () => import('pages/product/show') },
+      { path: 'product/:id/edit', name: 'edit', component: () => import('pages/product/edit') }
     ]
   },
 
