@@ -4,18 +4,18 @@
     <!-- (Optional) The Header -->
     <q-layout-header>
       <q-toolbar>
-        <q-btn
-          flat
-          round
-          dense
-          icon="menu"
-          @click="leftDrawer = !leftDrawer"
-        />
-        <q-toolbar-title>
-          Administrador
+        <q-toolbar-title class="text-center">
+          ADMINISTRAÇÃO
         </q-toolbar-title>
       </q-toolbar>
       <q-tabs>
+        <q-route-tab
+          slot="title"
+          icon="assignment"
+          to="/"
+          replace
+          label="Inicio"
+        />
         <q-route-tab
           slot="title"
           icon="assignment"
@@ -32,18 +32,6 @@
         />
       </q-tabs>
     </q-layout-header>
-
-    <!-- (Optional) A Drawer; you can add one more with side="right" or change this one's side -->
-    <q-layout-drawer
-      side="left"
-      v-model="leftDrawer"
-    >
-      <!-- QScrollArea is optional -->
-      <q-scroll-area class="fit q-pa-sm">
-        <!-- Content here -->
-      </q-scroll-area>
-    </q-layout-drawer>
-
     <q-page-container>
       <!-- This is where pages get injected -->
       <router-view />
@@ -55,12 +43,11 @@
 <script>
 export default {
   // name: 'LayoutName',
-  data () {
+  data() {
     return {
-      leftDrawer: false
-    }
-  }
-}
+    };
+  },
+};
 </script>
 
 <style>

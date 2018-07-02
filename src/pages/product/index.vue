@@ -1,59 +1,92 @@
 <template>
   <div class="container">
-    <q-page padding class="docs-input row flex justify-center">
-      <div class="col-xs-8 col-sm-8 col-md-8">
-        <h3>Produtos Cadastrados</h3>
+    <q-page class="flex justify-center">
+      <div class="col-xs-10 col-md-10">
+        <h3>Produtos Cadastrados ({{ products.length }})</h3>
         <p v-if="products.length === 0">Nenhum produto cadastrado!</p>
-        <ul v-else class="list">
-          <li v-for="product in products" :key="product.code">
-            <img :src="product.imageURL" :alt="product.name" class="responsive">
-            <p>Nome: {{ product.name }}</p>
-            <p>Código: {{ product.code }} </p>
-            <p>Quantidade: {{ product.quantity }} </p>
-            <p>Descrição: {{ product.description }}</p>
-            <router-link :to="{ name: 'edit', params: { id: product.code }}">
-              <q-btn
-                class="btn float-right"
-                icon="library_add"
-                color="primary"
-                label="Editar"
-              />
-            </router-link>
+        <div v-else>
+          <div v-for="product in products" :key="product.code">
+            <div class="row">
+              <div class="col-xs-12 col-md-4">
+                <div class="flex flex-center">
+                  <custom-image
+                    :source="product.imageURL"
+                    :name="product.name"
+                  />
+                </div>
+              </div>
+              <div class="col-xs-12 col-md-8 q-pl-md q-pt-md">
+                <p class="text-weight-bolder">{{ product.name }}</p>
+                <p><b>Código:</b> {{ product.code }} </p>
+                <p><b>Quantidade:</b> {{ product.quantity }} </p>
+                <p><b>Descrição:</b> {{ product.description }}</p>
+                <q-btn
+                  class="btn float-right q-ma-xs"
+                  icon="edit"
+                  color="primary"
+                  label="Editar"
+                  @click="$router.push({ name: 'edit', params: { id: product.code }})"
+                />
+                <q-btn
+                  class="btn float-right q-ma-xs"
+                  icon="delete"
+                  color="negative"
+                  label="Deletar"
+                  @click="$router.push({ name: 'edit', params: { id: product.code }})"
+                />
+              </div>
+            </div>
             <hr>
-          </li>
-        </ul>
+          </div>
+        </div>
+        <q-inner-loading :visible="visible"/>
       </div>
     </q-page>
   </div>
 </template>
 
 <script>
+import customImage from '../../components/customImage';
+
 export default {
   name: 'IndexProducts',
-  data () {
+  components: {
+    'custom-image': customImage,
+  },
+  data() {
     return {
-      products: []
-    }
+      products: [],
+      visible: true,
+    };
   },
 
-  created () {
+  methods: {
+    removeLoader() {
+      this.visible = false;
+    },
+  },
+
+  created() {
     this.$firestore.collection('products').get()
-      .then(snapshot => {
-        snapshot.forEach(doc => {
-          this.products.push(doc.data())
-        })
+      .then((snapshot) => {
+        snapshot.forEach((doc) => {
+          this.products.push(doc.data());
+        });
+        this.removeLoader();
       })
-      .catch(err => {
-        console.error('Error getting documents: ', err)
-      })
-  }
-}
+      .catch((err) => {
+        this.$q.notify({
+          type: 'negative',
+          message: `Erro ao obter produtos, ${err.message}`,
+          position: 'top',
+        });
+        this.removeLoader();
+      });
+  },
+};
 </script>
 
 <style scoped>
-.list {
-  list-style-type: none;
-}
 .btn {
   margin-top: 20px;
 }

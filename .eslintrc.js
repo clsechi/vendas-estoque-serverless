@@ -7,13 +7,9 @@ module.exports = {
   env: {
     browser: true
   },
-  extends: [
-    // https://github.com/vuejs/eslint-plugin-vue#priority-a-essential-error-prevention
-    // consider switching to `plugin:vue/strongly-recommended` or `plugin:vue/recommended` for stricter rules.
-    'plugin:vue/strongly-recommended',
-    // https://github.com/standard/standard/blob/master/docs/RULES-en.md
-    'standard'
-  ],
+  // https://github.com/vuejs/eslint-plugin-vue#priority-a-essential-error-prevention
+  // consider switching to `plugin:vue/strongly-recommended` or `plugin:vue/recommended` for stricter rules.
+  extends: ['plugin:vue/essential', 'airbnb-base'],
   // required to lint *.vue files
   plugins: [
     'vue'
@@ -25,17 +21,7 @@ module.exports = {
   },
   // add your custom rules here
   'rules': {
-    'brace-style': [2, 'stroustrup', { 'allowSingleLine': true }],
-
-    'vue/max-attributes-per-line': 0,
-    'vue/valid-v-for': 0,
-
-    // allow async-await
-    'generator-star-spacing': 'off',
-
-    // allow paren-less arrow functions
-    'arrow-parens': 0,
-    'one-var': 0,
+    'no-param-reassign': 0,
 
     'import/first': 0,
     'import/named': 2,

@@ -1,4 +1,4 @@
-import { initializeApp } from 'firebase'
+import { initializeApp } from 'firebase';
 
 const config = {
   apiKey: 'AIzaSyAYx5FF9Srg2AD9h3FK4y-95Y1Y4TVIUW8',
@@ -6,20 +6,20 @@ const config = {
   databaseURL: 'https://vendas-estoque.firebaseio.com',
   projectId: 'vendas-estoque',
   storageBucket: 'vendas-estoque.appspot.com',
-  messagingSenderId: '95591095931'
-}
+  messagingSenderId: '95591095931',
+};
 
-const fireApp = initializeApp(config)
+const fireApp = initializeApp(config);
 
-const AUTH = fireApp.auth()
+const AUTH = fireApp.auth();
 
-fireApp.firestore().settings({ timestampsInSnapshots: true })
-const DB = fireApp.firestore()
+fireApp.firestore().settings({ timestampsInSnapshots: true });
+const DB = fireApp.firestore();
 
-const STORAGE = fireApp.storage()
+const STORAGE = fireApp.storage();
 
-export default ({ app, router, Vue }) => {
-  Vue.prototype.$auth = AUTH
-  Vue.prototype.$firestore = DB
-  Vue.prototype.$storage = STORAGE
-}
+export default ({ Vue }) => {
+  Vue.prototype.$auth = AUTH;
+  Vue.prototype.$firestore = DB;
+  Vue.prototype.$storage = STORAGE;
+};

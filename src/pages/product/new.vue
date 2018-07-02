@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <q-page padding class="docs-input row flex justify-center">
+    <q-page class="docs-input row flex justify-center">
       <my-product-form
         :button="button"
         :title="title"
@@ -10,23 +10,23 @@
 </template>
 
 <script>
-import productForm from '../../components/productForm'
+import productForm from '../../components/productForm';
 
 export default {
   name: 'NewProduct',
   components: {
-    'my-product-form': productForm
+    'my-product-form': productForm,
   },
 
-  data () {
+  data() {
     return {
       title: 'Cadastrar Novo Produto',
       button: {
-        label: 'Criar Produto'
-      }
-    }
-  }
-}
+        label: 'Criar Produto',
+      },
+    };
+  },
+};
 </script>
 
 <style scoped>

@@ -1,5 +1,5 @@
 <template>
-  <div class="col-xs-8 col-sm-8 col-md-8">
+  <div class="col-xs-10 col-sm-8 col-md-10">
     <h3>{{ title }}</h3>
     <q-input
       v-model="form.name"
@@ -28,6 +28,16 @@
       :error="$v.form.quantity.$error"
       type="number"
       float-label="Quantidade"
+    />
+
+    <q-input
+      class="q-mt-md"
+      v-model="form.color"
+      @blur="$v.form.color.$touch"
+      @keyup.enter="createProduct"
+      :error="$v.form.color.$error"
+      type="text"
+      float-label="Cor/Acabamento"
     />
 
     <q-input
@@ -69,16 +79,6 @@
       :error="$v.form.size.$error"
       type="text"
       float-label="Dimensões"
-    />
-
-    <q-input
-      class="q-mt-md"
-      v-model="form.color"
-      @blur="$v.form.color.$touch"
-      @keyup.enter="createProduct"
-      :error="$v.form.color.$error"
-      type="text"
-      float-label="Cor/Acabamento"
     />
 
     <q-input
@@ -147,25 +147,26 @@
 </template>
 
 <script>
-import { required } from 'vuelidate/lib/validators'
+import { required } from 'vuelidate/lib/validators';
 
 export default {
+  name: 'ProductForm',
   props: {
     button: {
       required: true,
-      type: Object
+      type: Object,
     },
     title: {
       required: true,
-      type: String
+      type: String,
     },
     code: {
       default: '',
-      type: String
-    }
+      type: String,
+    },
   },
 
-  data () {
+  data() {
     return {
       form: {
         name: '',
@@ -180,32 +181,32 @@ export default {
         imageURL: '',
         cost_price: '',
         sell_price: '',
-        obs: ''
+        obs: '',
       },
       url: '',
       categories: [
         {
           label: 'Fechadura',
-          value: 'Fechadura'
+          value: 'Fechadura',
         },
         {
           label: 'Trinco',
-          value: 'Trinco'
+          value: 'Trinco',
         },
         {
           label: 'Fecho',
-          value: 'Fecho'
+          value: 'Fecho',
         },
         {
           label: 'Pivô',
-          value: 'Pivô'
+          value: 'Pivô',
         },
         {
           label: 'Acessórios',
-          value: 'Acessórios'
-        }
-      ]
-    }
+          value: 'Acessórios',
+        },
+      ],
+    };
   },
 
   validations: {
@@ -220,79 +221,75 @@ export default {
       color: { required },
       manufacturer: { required },
       cost_price: { required },
-      sell_price: { required }
-    }
+      sell_price: { required },
+    },
   },
 
-  created () {
+  created() {
     if (this.code) {
       this.$firestore.collection('products').doc(this.code).get()
-        .then(doc => {
-          this.form = doc.data()
+        .then((doc) => {
+          this.form = doc.data();
         })
-        .catch(err => {
+        .catch((err) => {
           this.$q.notify({
-            message: 'Erro ao criar produto!.',
-            position: 'top'
-          })
-          console.error('Error adding document: ', err)
-        })
+            message: `Erro ao criar produto, ${err.message}`,
+            position: 'top',
+          });
+        });
     }
   },
 
   methods: {
-    createProduct () {
-      this.$v.form.$touch()
+    createProduct() {
+      this.$v.form.$touch();
 
       if (this.$v.form.$error) {
         this.$q.notify({
           message: 'Por favor preencha os campos corretamente.',
-          position: 'top'
-        })
-        return
+          position: 'top',
+        });
+        return;
       }
 
       this.$firestore.collection('products').doc(this.form.code.toString()).set(this.form)
-        .then(docRef => {
+        .then(() => {
           this.$q.notify({
             type: 'positive',
             message: 'Produto criado com sucesso!',
             color: 'positive',
-            position: 'top'
-          })
+            position: 'top',
+          });
         })
-        .catch(err => {
+        .catch((err) => {
           this.$q.notify({
-            message: 'Erro ao procurar produto!.',
-            position: 'top'
-          })
-          console.error('Error getting document: ', err)
-        })
+            message: `Erro ao obter produto, ${err.message}`,
+            position: 'top',
+          });
+        });
     },
 
-    uploadImage () {
-      const file = this.$refs.uploader.files[0]
+    uploadImage() {
+      const file = this.$refs.uploader.files[0];
 
-      const metadata = { contentType: 'image/jpeg' }
+      const metadata = { contentType: 'image/jpeg' };
 
       this.$storage.ref().child(`images/${Date.now().toString()}`).put(file, metadata)
-        .then(snapshot => {
+        .then((snapshot) => {
           snapshot.ref.getDownloadURL()
-            .then(downloadURL => {
-              this.form.imageURL = downloadURL
-              console.log('File available at', downloadURL)
-            })
+            .then((downloadURL) => {
+              this.form.imageURL = downloadURL;
+            });
         })
-        .catch(err => {
+        .catch((err) => {
           this.$q.notify({
-            message: 'Erro ao enviar imagem!.',
-            position: 'top'
-          })
-          console.error('Error to send files', err)
-        })
-    }
-  }
-}
+            message: `Erro ao enviar imagem, ${err.message}`,
+            position: 'top',
+          });
+        });
+    },
+  },
+};
 </script>
 
 <style scoped>

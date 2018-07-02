@@ -5,8 +5,8 @@ export default [
     component: () => import('layouts/default'),
     children: [
       { path: '', component: () => import('pages/index') },
-      { path: 'login', component: () => import('pages/Login') }
-    ]
+      { path: 'login', component: () => import('pages/Login') },
+    ],
   },
 
   {
@@ -16,12 +16,12 @@ export default [
       { path: 'products', component: () => import('pages/product/index') },
       { path: 'product/new', component: () => import('pages/product/new') },
       { path: 'product/:id/show', name: 'show', component: () => import('pages/product/show') },
-      { path: 'product/:id/edit', name: 'edit', component: () => import('pages/product/edit') }
-    ]
+      { path: 'product/:id/edit', name: 'edit', component: () => import('pages/product/edit') },
+    ],
   },
 
   { // Always leave this as last one
     path: '*',
-    component: () => import('pages/404')
-  }
-]
+    component: () => import('pages/404'),
+  },
+];

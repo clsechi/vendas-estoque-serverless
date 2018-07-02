@@ -11,24 +11,24 @@
 </template>
 
 <script>
-import productForm from '../../components/productForm'
+import productForm from '../../components/productForm';
 
 export default {
   name: 'EditProduct',
   components: {
-    'my-product-form': productForm
+    'my-product-form': productForm,
   },
 
-  data () {
+  data() {
     return {
       title: 'Editar Produto',
       button: {
-        label: 'Atualizar Produto'
+        label: 'Atualizar Produto',
       },
-      code: this.$route.params.id.toString()
-    }
-  }
-}
+      code: this.$route.params.id.toString(),
+    };
+  },
+};
 </script>
 
 <style scoped>

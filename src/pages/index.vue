@@ -1,35 +1,78 @@
 <template>
   <q-page class="flex flex-center">
-    <q-card inline style="width: 500px">
+    <q-card v-for="product in products"
+      :key="product.code"
+      inline style="width: 250px"
+      class="q-ma-md">
       <q-card-media>
-        <img src="">
+        <custom-image
+          :source="product.imageURL"
+          :name="product.name"
+        />
       </q-card-media>
-      <q-card-title>
-        {{ product.name }}
-        <q-rating slot="subtitle" v-model="stars" :max="5" />
-      </q-card-title>
-      <q-card-main>
-        <p>$・Italian, Cafe</p>
-        <p class="text-faded">Small plates, salads & sandwiches in an intimate setting.</p>
+      <q-card-main class="q-pb-xs">
+        <p>{{ product.name }}</p>
+        <p class="for-price text-primary">Por:
+          <span class="text-weight-bold price"> R$ {{ product.sell_price }}</span>
+        </p>
       </q-card-main>
-      <q-card-separator />
-      <q-card-actions>
-        <q-btn flat round dense icon="event" />
-        <q-btn flat label="5:30PM" />
-        <q-btn flat label="7:30PM" />
-        <q-btn flat label="9:00PM" />
-        <q-btn flat color="primary" label="Reserve" />
+      <q-card-actions class="justify-center">
+        <q-btn
+          class="text-weight-bold q-mb-sm"
+          color="secondary"
+          label="Saiba Mais"
+        />
       </q-card-actions>
     </q-card>
   </q-page>
 </template>
 
 <script>
+import customImage from '../components/customImage';
+
 export default {
-  name: 'PageIndex'
-}
+  name: 'PageIndex',
+  components: {
+    'custom-image': customImage,
+  },
+
+  data() {
+    return {
+      products: [],
+      visible: true,
+    };
+  },
+
+  methods: {
+    removeLoader() {
+      this.visible = false;
+    },
+  },
+  created() {
+    this.$firestore.collection('products').get()
+      .then((snapshot) => {
+        snapshot.forEach((doc) => {
+          this.products.push(doc.data());
+        });
+        this.removeLoader();
+      })
+      .catch((err) => {
+        this.$q.notify({
+          type: 'negative',
+          message: `Erro ao obter produtos, ${err.message}`,
+          position: 'top',
+        });
+        this.removeLoader();
+      });
+  },
+};
 </script>
 
 <style scoped>
-
+.for-price {
+  font-size: 18px;
+}
+.price{
+  font-size: 23px;
+}
 </style>

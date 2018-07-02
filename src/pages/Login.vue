@@ -11,7 +11,6 @@
           :error="$v.form.email.$error"
           float-label="Email"
         />
-
         <q-input
           v-model="form.password"
           @blur="$v.form.password.$touch"
@@ -20,7 +19,6 @@
           type="password"
           float-label="Senha"
         />
-
         <q-btn
           class="btn-submit float-right"
           type="submit"
@@ -36,56 +34,55 @@
 </template>
 
 <script>
-import { required, email } from 'vuelidate/lib/validators'
+import { required, email } from 'vuelidate/lib/validators';
 
 export default {
   name: 'LoginPage',
-  data () {
+  data() {
     return {
       form: {
         email: '',
-        password: ''
+        password: '',
       },
-      loading: false
-    }
+      loading: false,
+    };
   },
   validations: {
     form: {
       email: { required, email },
-      password: { required }
-    }
+      password: { required },
+    },
   },
   methods: {
-    signIn () {
-      this.$v.form.$touch()
+    signIn() {
+      this.$v.form.$touch();
 
       if (this.$v.form.$error) {
         this.$q.notify({
           message: 'Por favor preencha os campos corretamente.',
-          position: 'top'
-        })
-        return
+          position: 'top',
+        });
+        return;
       }
 
-      this.loading = true
+      this.loading = true;
       this.$auth.signInWithEmailAndPassword(this.form.email, this.form.password)
-        .then(user => {
-          this.loading = false
+        .then(() => {
+          this.loading = false;
           this.$q.notify({
             type: 'positive',
             message: 'Login efetuado com sucesso',
             color: 'positive',
-            position: 'top'
-          })
+            position: 'top',
+          });
         })
-        .catch(err => {
-          this.loading = false
-          this.$q.notify('Ouve um problema')
-          console.error(err)
-        })
-    }
-  }
-}
+        .catch((err) => {
+          this.loading = false;
+          this.$q.notify(`Ouve um problema ${err.message}`);
+        });
+    },
+  },
+};
 </script>
 
 <style scoped>

@@ -7,12 +7,12 @@
 <script>
 export default {
   name: 'ShowProduct',
-  data () {
+  data() {
     return {
-      product: {}
-    }
-  }
-}
+      product: {},
+    };
+  },
+};
 </script>
 
 <style>

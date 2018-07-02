@@ -1,9 +1,10 @@
-// Configuration for your app
+/* eslint-disable */
 
 module.exports = function (ctx) {
   return {
     // app plugins (/src/plugins)
-    plugins: [ 'Firebase',
+    plugins: [
+      'Firebase',
       'vuelidate'
     ],
     css: [
@@ -69,8 +70,7 @@ module.exports = function (ctx) {
       'Notify'
     ] */
     // animations: 'all' --- includes all animations
-    animations: [
-    ],
+    animations: 'all',
     pwa: {
       cacheExt: 'js,html,css,ttf,eot,otf,woff,woff2,json,svg,gif,jpg,jpeg,png,wav,ogg,webm,flac,aac,mp4,mp3',
       manifest: {
