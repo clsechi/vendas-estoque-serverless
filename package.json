@@ -1,10 +1,10 @@
 {
   "name": "vendas-estoque",
   "version": "1.0.0",
-  "description": "A Quasar Framework app",
-  "productName": "Quasar App",
+  "description": "Vendas estoque",
+  "productName": "Vendas Estoque",
   "cordovaId": "org.cordova.quasar.app",
-  "author": "Carlos Sechi <carlos.sechi@frentecorretora.com.br>",
+  "author": "Carlos Sechi <carlossechi@hotmail.com>",
   "private": true,
   "scripts": {
     "lint": "eslint --ext .js,.vue src",
@@ -12,16 +12,16 @@
     "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
-    "firebase": "^5.0.3",
+    "firebase": "^5.2.0",
     "vuelidate": "^0.6.2"
   },
   "devDependencies": {
-    "babel-eslint": "^8.2.1",
+    "babel-eslint": "^8.2.5",
     "eslint": "^4.18.2",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-friendly-formatter": "^3.0.0",
     "eslint-loader": "^2.0.0",
-    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-import": "^2.13.0",
     "eslint-plugin-vue": "^4.3.0",
     "quasar-cli": "^0.15.20"
   },

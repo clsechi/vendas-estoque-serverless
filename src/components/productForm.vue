@@ -186,24 +186,24 @@ export default {
       url: '',
       categories: [
         {
-          label: 'Fechadura',
-          value: 'Fechadura',
+          label: 'Fechaduras',
+          value: 'Fechaduras',
         },
         {
-          label: 'Trinco',
-          value: 'Trinco',
+          label: 'Trincos',
+          value: 'Trincos',
         },
         {
-          label: 'Fecho',
-          value: 'Fecho',
+          label: 'Fechos',
+          value: 'Fechos',
         },
         {
-          label: 'Pivô',
-          value: 'Pivô',
+          label: 'Pivôs',
+          value: 'Pivos',
         },
         {
           label: 'Acessórios',
-          value: 'Acessórios',
+          value: 'Acessorios',
         },
       ],
     };
@@ -233,7 +233,7 @@ export default {
         })
         .catch((err) => {
           this.$q.notify({
-            message: `Erro ao criar produto, ${err.message}`,
+            message: `Erro obter produto, ${err.message}`,
             position: 'top',
           });
         });

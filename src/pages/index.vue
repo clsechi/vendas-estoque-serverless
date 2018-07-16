@@ -1,28 +1,22 @@
 <template>
-  <q-page class="flex flex-center">
+  <q-page class="flex">
     <q-card v-for="product in products"
       :key="product.code"
-      inline style="width: 250px"
-      class="q-ma-md">
+      inline
+      class="q-ma-md card">
       <q-card-media>
         <custom-image
+          class="card-image"
           :source="product.imageURL"
           :name="product.name"
         />
       </q-card-media>
-      <q-card-main class="q-pb-xs">
-        <p>{{ product.name }}</p>
-        <p class="for-price text-primary">Por:
-          <span class="text-weight-bold price"> R$ {{ product.sell_price }}</span>
+      <q-card-main class="q-pb-xs text-center">
+        <p class="name">{{ product.name }}</p>
+        <p class="for-price text-primary">R$
+          <span class="text-weight-bold price">{{ product.sell_price }}</span>
         </p>
       </q-card-main>
-      <q-card-actions class="justify-center">
-        <q-btn
-          class="text-weight-bold q-mb-sm"
-          color="secondary"
-          label="Saiba Mais"
-        />
-      </q-card-actions>
     </q-card>
   </q-page>
 </template>
@@ -70,9 +64,21 @@ export default {
 
 <style scoped>
 .for-price {
-  font-size: 18px;
+  font-size: 15px;
 }
-.price{
+.price {
   font-size: 23px;
+}
+.card {
+  width: 200px;
+  height: 340px;
+}
+.card .name {
+  font-size: 1.10em;
+  height: 30px;
+}
+.card-image {
+  height:230px;
+  background-color:#fafafa;
 }
 </style>
