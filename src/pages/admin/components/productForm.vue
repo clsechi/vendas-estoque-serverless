@@ -1,5 +1,5 @@
 <template>
-  <div class="col-xs-10 col-sm-8 col-md-10">
+  <div class="col-xs-10 col-md-10">
     <h3>{{ title }}</h3>
     <q-input
       v-model="form.name"

@@ -5,7 +5,7 @@ module.exports = function (ctx) {
     // app plugins (/src/plugins)
     plugins: [
       'Firebase',
-      'vuelidate'
+      'vuelidate',
     ],
     css: [
       'app.styl'
@@ -29,7 +29,7 @@ module.exports = function (ctx) {
       // analyze: true,
       // extractCSS: false,
       // useNotifier: false,
-      extendWebpack (cfg) {
+      extendWebpack(cfg) {
         cfg.module.rules.push({
           enforce: 'pre',
           test: /\.(js|vue)$/,
@@ -44,31 +44,49 @@ module.exports = function (ctx) {
       open: true // opens browser window automatically
     },
     // framework: 'all' --- includes everything; for dev only!
-    framework: 'all',
-    /* components: [
-      'QField',
-      'QLayout',
-      'QLayoutHeader',
-      'QLayoutDrawer',
-      'QPageContainer',
-      'QPage',
-      'QToolbar',
-      'QToolbarTitle',
-      'QBtn',
-      'QIcon',
-      'QList',
-      'QListHeader',
-      'QItem',
-      'QItemMain',
-      'QItemSide'
-    ],
-    directives: [
-      'Ripple'
-    ],
-    // Quasar plugins
-    plugins: [
-      'Notify'
-    ] */
+    framework: {
+      components: [
+        'QField',
+        'QLayout',
+        'QLayoutHeader',
+        'QLayoutDrawer',
+        'QPageContainer',
+        'QPage',
+        'QToolbar',
+        'QToolbarTitle',
+        'QBtn',
+        'QIcon',
+        'QList',
+        'QListHeader',
+        'QItem',
+        'QItemMain',
+        'QItemSide',
+        'QAutocomplete',
+        'QSearch',
+        'QCard',
+        'QCardMain',
+        'QCardMedia',
+        'QCardActions',
+        'QInnerLoading',
+        'QTabs',
+        'QTab',
+        'QTabPane',
+        'QRouteTab',
+        'QInput',
+        'QSelect',
+        'QUploader',
+        'QBreadcrumbs',
+        'QBreadcrumbsEl',
+      ],
+      directives: [
+        'Ripple',
+        'BackToTop',
+      ],
+      // Quasar plugins
+      plugins: [
+        'Notify',
+      ]
+    },
     // animations: 'all' --- includes all animations
     animations: 'all',
     pwa: {
@@ -114,7 +132,7 @@ module.exports = function (ctx) {
       // id: 'org.cordova.quasar.app'
     },
     electron: {
-      extendWebpack (cfg) {
+      extendWebpack(cfg) {
         // do something with cfg
       },
       packager: {

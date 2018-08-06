@@ -1,13 +1,15 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-import example from './module-example';
+import product from './product';
+import order from './order';
 
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
   modules: {
-    example,
+    product,
+    order,
   },
 });
 

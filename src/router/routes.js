@@ -5,7 +5,9 @@ export default [
     component: () => import('layouts/default'),
     children: [
       { path: '', component: () => import('pages/index') },
-      { path: 'login', component: () => import('pages/Login') },
+      { path: 'categorias/:id', name: 'categories', component: () => import('pages/common/category') },
+      { path: 'produtos/:id', name: 'products', component: () => import('pages/common/product') },
+      { path: 'cart', name: 'cart', component: () => import('pages/common/cart') },
     ],
   },
 
@@ -13,10 +15,11 @@ export default [
     path: '/admin',
     component: () => import('layouts/admin'),
     children: [
-      { path: 'products', component: () => import('pages/product/index') },
-      { path: 'products/new', component: () => import('pages/product/new') },
-      { path: 'products/:id/show', name: 'show', component: () => import('pages/product/show') },
-      { path: 'products/:id/edit', name: 'edit', component: () => import('pages/product/edit') },
+      { path: 'login', component: () => import('pages/Login') },
+      { path: 'products', component: () => import('pages/admin/products/index') },
+      { path: 'products/new', name: 'new', component: () => import('pages/admin/products/new') },
+      { path: 'products/:id/show', name: 'show', component: () => import('pages/admin/products/show') },
+      { path: 'products/:id/edit', name: 'edit', component: () => import('pages/admin/products/edit') },
     ],
   },
 
