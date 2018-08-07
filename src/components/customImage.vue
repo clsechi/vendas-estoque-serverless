@@ -22,11 +22,9 @@ export default {
   props: {
     source: {
       required: true,
-      type: String,
     },
     name: {
       required: true,
-      type: String,
     },
   },
   data() {

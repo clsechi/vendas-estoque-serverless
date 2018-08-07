@@ -157,7 +157,7 @@ export default {
     ...mapGetters('product', ['products']),
   },
 
-  created() {
+  mounted() {
     this.findProduct();
   },
 };
