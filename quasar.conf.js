@@ -128,25 +128,6 @@ module.exports = function (ctx) {
         ]
       }
     },
-    cordova: {
-      // id: 'org.cordova.quasar.app'
-    },
-    electron: {
-      extendWebpack(cfg) {
-        // do something with cfg
-      },
-      packager: {
-        // OS X / Mac App Store
-        // appBundleId: '',
-        // appCategoryType: '',
-        // osxSign: '',
-        // protocol: 'myapp://path',
-
-        // Window only
-        // win32metadata: { ... }
-      }
-    },
-
     // leave this here for Quasar CLI
     starterKit: '1.0.3'
   }

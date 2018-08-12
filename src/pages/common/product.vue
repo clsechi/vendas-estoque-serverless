@@ -9,7 +9,7 @@
           <q-breadcrumbs-el label="Estoque do Sechi" to="/" />
           <q-breadcrumbs-el
             :label="product.category"
-            :to="{name: 'categories', params: { id: product.category }}"
+            :to="{ name: 'categories', params: { id: product.category.toLowerCase() }}"
           />
           <q-breadcrumbs-el :label="product.name" />
         </q-breadcrumbs>
@@ -157,7 +157,7 @@ export default {
     ...mapGetters('product', ['products']),
   },
 
-  mounted() {
+  beforeMount() {
     this.findProduct();
   },
 };

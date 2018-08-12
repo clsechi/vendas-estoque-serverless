@@ -8,6 +8,18 @@
         class="q-py-xs justify-center"
         color="primary"
       >
+        <div class="q-ml-lg q-mt-sm fixed-left">
+          <q-btn
+            icon="keyboard_arrow_left"
+            text-color="white"
+            size="xl"
+            round
+            dense
+            flat
+            no-ripple
+            @click="$router.push('/')"
+          />
+        </div>
         <div class="text-center">
           <router-link to="/">
             <img
@@ -18,7 +30,9 @@
             />
           </router-link>
         </div>
-        <cart/>
+        <div class="q-mr-lg q-mt-sm fixed-right">
+          <cart/>
+        </div>
       </q-toolbar>
       <div class="flex flex-center bg-primary">
         <div class="col-10">

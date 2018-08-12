@@ -1,6 +1,5 @@
 <template>
   <q-btn
-    class="q-mr-lg q-mt-sm absolute-right"
     icon="shopping_cart"
     color="white"
     round

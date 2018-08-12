@@ -19,6 +19,7 @@
 <script>
 export default {
   name: 'CustomImage',
+
   props: {
     source: {
       required: true,
@@ -27,24 +28,22 @@ export default {
       required: true,
     },
   },
+
   data() {
     return {
       defaultImage: 'https://firebasestorage.googleapis.com/v0/b/vendas-estoque.appspot.com/o/indisponivel.png?alt=media&token=b1789f7a-c7ca-47f8-a096-a45362f823c6',
-      finalSource: '',
       visible: true,
     };
   },
-  created() {
-    this.haveImage();
-  },
-  methods: {
-    haveImage() {
-      if (this.source === '') {
-        this.finalSource = this.defaultImage;
-      } else {
-        this.finalSource = this.source;
-      }
+
+  computed: {
+    finalSource() {
+      if (this.source === '') return this.defaultImage;
+      return this.source;
     },
+  },
+
+  methods: {
 
     removeLoader() {
       this.visible = false;
