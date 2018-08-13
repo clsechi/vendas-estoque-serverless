@@ -4,3 +4,7 @@
 export const addProduct = async ({ commit }, product) => {
   commit('addProduct', product);
 };
+
+export const removeProduct = async ({ commit }, productCode) => {
+  commit('removeProduct', productCode);
+};

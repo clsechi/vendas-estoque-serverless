@@ -8,7 +8,7 @@
         class="q-py-xs justify-center"
         color="primary"
       >
-        <div class="q-ml-lg q-mt-sm fixed-left">
+        <div class="q-ml-sm absolute-left">
           <q-btn
             icon="keyboard_arrow_left"
             text-color="white"
@@ -26,20 +26,22 @@
               src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"
               alt="Estoque do Sechi"
               class="responsive"
-              style="width:70%;"
+              style="width:50%;"
             />
           </router-link>
         </div>
-        <div class="q-mr-lg q-mt-sm fixed-right">
+        <div class="q-mr-sm absolute-right">
           <cart/>
         </div>
       </q-toolbar>
-      <div class="flex flex-center bg-primary">
+      <div class="row flex-center bg-primary">
         <div class="col-10">
           <search/>
         </div>
       </div>
-      <q-tabs >
+      <q-tabs
+        align="center"
+      >
         <q-route-tab
           slot="title"
           :to="{ name: 'categories', params: { id: 'fechaduras' }}"
@@ -95,7 +97,7 @@
 
 <script>
 import search from '../components/search';
-import cart from '../components/cart';
+import cart from '../components/cartIcon';
 
 export default {
   name: 'LayoutDefault',

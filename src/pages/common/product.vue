@@ -16,7 +16,7 @@
       </div>
     </div>
     <hr>
-    <div class="flex q-mt-sm">
+    <div class="row q-mt-sm">
       <div class="col-xs-12 col-md-5 text-center">
         <custom-image
           class="card-image"
@@ -28,7 +28,7 @@
         <span> {{ product.manufacturer }} </span>
         <p class="q-display-1 text-weight-bolder"> {{ product.name }} </p>
         <p class="text-muted">Cód: {{ product.code }}</p>
-        <div class="flex flex-center">
+        <div class="row flex-center">
           <div class="col-xs-12 col-md-12 text-center">
             <p class="for-price text-primary">R$
               <span class="text-weight-bold price">{{ product.sell_price }},00</span>
@@ -47,7 +47,7 @@
       </div>
     </div>
     <hr class="q-mt-xl">
-    <div class="flex q-mt-md">
+    <div class="row q-mt-md">
       <div class="col-xs-12 col-md-6">
         <p class="q-headline">Descrição</p>
         <p> {{ product.description }} </p>
@@ -145,6 +145,7 @@ export default {
         type: 'positive',
         color: 'positive',
       });
+      this.$router.push('/cart');
     },
 
     findProduct() {

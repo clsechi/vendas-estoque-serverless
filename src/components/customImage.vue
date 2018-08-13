@@ -8,7 +8,7 @@
       <img
         :src="finalSource"
         :alt="name"
-        class="responsive q-pt-md"
+        class="responsive"
         @load="removeLoader"
       />
     </transition>
@@ -31,7 +31,7 @@ export default {
 
   data() {
     return {
-      defaultImage: 'https://firebasestorage.googleapis.com/v0/b/vendas-estoque.appspot.com/o/indisponivel.png?alt=media&token=b1789f7a-c7ca-47f8-a096-a45362f823c6',
+      defaultImage: '/assets/unavailable.png',
       visible: true,
     };
   },

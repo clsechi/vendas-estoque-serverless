@@ -85,11 +85,14 @@ module.exports = function (ctx) {
       // Quasar plugins
       plugins: [
         'Notify',
+        'Dialog',
       ]
     },
     // animations: 'all' --- includes all animations
     animations: 'all',
     pwa: {
+      // workboxPluginMode: 'InjectManifest',
+      // workboxOptions: {},
       cacheExt: 'js,html,css,ttf,eot,otf,woff,woff2,json,svg,gif,jpg,jpeg,png,wav,ogg,webm,flac,aac,mp4,mp3',
       manifest: {
         // name: 'Quasar App',

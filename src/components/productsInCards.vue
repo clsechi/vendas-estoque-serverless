@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-center">
+  <div :class="cardsOrder">
     <q-card v-for="product in products"
       :key="product.code"
       inline
@@ -39,6 +39,12 @@ export default {
   },
   data() {
     return {};
+  },
+  computed: {
+    cardsOrder() {
+      if (this.$q.platform.is.mobile) return 'flex justify-center';
+      return 'flex justify-start';
+    },
   },
 };
 </script>
