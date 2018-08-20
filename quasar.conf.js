@@ -64,6 +64,7 @@ module.exports = function (ctx) {
         'QAutocomplete',
         'QSearch',
         'QCard',
+        'QCardTitle',
         'QCardMain',
         'QCardMedia',
         'QCardActions',
@@ -77,6 +78,11 @@ module.exports = function (ctx) {
         'QUploader',
         'QBreadcrumbs',
         'QBreadcrumbsEl',
+        'QModal',
+        'QCarousel',
+        'QCarouselSlide',
+        'QCarouselControl',
+        'QTooltip',
       ],
       directives: [
         'Ripple',
@@ -86,6 +92,7 @@ module.exports = function (ctx) {
       plugins: [
         'Notify',
         'Dialog',
+        'LocalStorage',
       ]
     },
     // animations: 'all' --- includes all animations

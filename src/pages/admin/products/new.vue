@@ -1,12 +1,10 @@
 <template>
-  <div class="container">
-    <q-page class="docs-input row flex justify-center">
-      <my-product-form
-        :button="button"
-        :title="title"
-      />
-    </q-page>
-  </div>
+  <q-page padding class="row justify-center">
+    <my-product-form
+      :button="button"
+      :title="title"
+    />
+  </q-page>
 </template>
 
 <script>

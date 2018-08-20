@@ -4,11 +4,13 @@
       <div class="col-12 q-mb-md">
         <span class="q-display-1 float-left">Produtos Cadastrados ({{ products.length }})</span>
         <q-btn
-          class="float-right"
+          round
+          size="lg"
+          class="fixed"
           icon="add"
           color="primary"
-          label="Novo Produto"
           @click="$router.push({ name: 'new' })"
+          style="right: 18px; bottom: 18px"
         />
       </div>
       <p v-if="products.length === 0">Nenhum produto cadastrado!</p>
@@ -16,10 +18,11 @@
         <div v-for="product in products" :key="product.code">
           <div class="flex">
             <div class="col-xs-12 col-md-4">
-                <custom-image
-                  :source="product.imageURL"
-                  :name="product.name"
-                />
+              <custom-image
+                height="230"
+                :source="product.imageURL"
+                :name="product.name"
+              />
             </div>
             <div class="col-xs-12 col-md-8 q-pl-md q-pt-md">
               <p class="text-weight-bolder">{{ product.name }}</p>

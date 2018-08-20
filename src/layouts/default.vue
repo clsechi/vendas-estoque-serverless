@@ -10,6 +10,7 @@
       >
         <div class="q-ml-sm absolute-left">
           <q-btn
+            v-if="$router.currentRoute.path !== '/'"
             icon="keyboard_arrow_left"
             text-color="white"
             size="xl"

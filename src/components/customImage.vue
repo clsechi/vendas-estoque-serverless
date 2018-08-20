@@ -8,8 +8,9 @@
       <img
         :src="finalSource"
         :alt="name"
-        class="responsive"
-        @load="removeLoader"
+        class=""
+        :height="height"
+        @load="visible = !visible"
       />
     </transition>
     <q-inner-loading :visible="visible"/>
@@ -27,6 +28,10 @@ export default {
     name: {
       required: true,
     },
+    height: {
+      required: true,
+      type: String,
+    },
   },
 
   data() {
@@ -38,15 +43,8 @@ export default {
 
   computed: {
     finalSource() {
-      if (this.source === '') return this.defaultImage;
+      if (!this.source) return this.defaultImage;
       return this.source;
-    },
-  },
-
-  methods: {
-
-    removeLoader() {
-      this.visible = false;
     },
   },
 };

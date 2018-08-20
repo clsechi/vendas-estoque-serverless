@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <q-page padding class="docs-input row flex justify-center">
+    <q-page padding class="row justify-center">
       <div class="col-xs-8 col-sm-8 col-md-8">
         <h3>Login</h3>
         <q-input

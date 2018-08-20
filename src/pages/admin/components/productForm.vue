@@ -1,20 +1,19 @@
 <template>
   <div class="col-xs-10 col-md-10">
-    <h3>{{ title }}</h3>
+    <span class="q-display-1">{{ title }}</span>
     <q-input
       v-model="form.name"
       @blur="$v.form.name.$touch"
-      @keyup.enter="createProduct"
       :error="$v.form.name.$error"
       type="text"
       float-label="Nome"
+      autofocus
     />
 
     <q-input
       class="q-mt-md"
       v-model="form.code"
       @blur="$v.form.code.$touch"
-      @keyup.enter="createProduct"
       :error="$v.form.code.$error"
       type="number"
       float-label="Código"
@@ -22,19 +21,17 @@
 
     <q-input
       class="q-mt-md"
-      v-model="form.quantity"
-      @blur="$v.form.quantity.$touch"
-      @keyup.enter="createProduct"
-      :error="$v.form.quantity.$error"
+      v-model="form.stockQuantity"
+      @blur="$v.form.stockQuantity.$touch"
+      :error="$v.form.stockQuantity.$error"
       type="number"
-      float-label="Quantidade"
+      float-label="Quantidade em Estoque"
     />
 
     <q-input
       class="q-mt-md"
       v-model="form.color"
       @blur="$v.form.color.$touch"
-      @keyup.enter="createProduct"
       :error="$v.form.color.$error"
       type="text"
       float-label="Cor/Acabamento"
@@ -44,7 +41,6 @@
       class="q-mt-md"
       v-model="form.description"
       @blur="$v.form.description.$touch"
-      @keyup.enter="createProduct"
       :error="$v.form.description.$error"
       type="textarea"
       float-label="Descrição"
@@ -54,7 +50,6 @@
       class="q-mt-md"
       v-model="form.category"
       @blur="$v.form.category.$touch"
-      @keyup.enter="createProduct"
       :error="$v.form.category.$error"
       type="select"
       float-label="Categoria"
@@ -65,7 +60,6 @@
       class="q-mt-md"
       v-model="form.material"
       @blur="$v.form.material.$touch"
-      @keyup.enter="createProduct"
       :error="$v.form.material.$error"
       type="text"
       float-label="Material"
@@ -75,7 +69,6 @@
       class="q-mt-md"
       v-model="form.size"
       @blur="$v.form.size.$touch"
-      @keyup.enter="createProduct"
       :error="$v.form.size.$error"
       type="text"
       float-label="Dimensões"
@@ -85,7 +78,6 @@
       class="q-mt-md"
       v-model="form.manufacturer"
       @blur="$v.form.manufacturer.$touch"
-      @keyup.enter="createProduct"
       :error="$v.form.manufacturer.$error"
       type="text"
       float-label="Fabricante"
@@ -93,22 +85,21 @@
 
     <q-input
       class="q-mt-md"
-      v-model="form.cost_price"
-      @blur="$v.form.cost_price.$touch"
-      @keyup.enter="createProduct"
-      :error="$v.form.cost_price.$error"
+      v-model="form.costPrice"
+      @blur="$v.form.costPrice.$touch"
+      :error="$v.form.costPrice.$error"
       type="number"
       float-label="Preço de Custo"
       :decimals="2"
       prefix="R$"
+      :step="0.01"
     />
 
     <q-input
       class="q-mt-md"
-      v-model="form.sell_price"
-      @blur="$v.form.sell_price.$touch"
-      @keyup.enter="createProduct"
-      :error="$v.form.sell_price.$error"
+      v-model="form.sellPrice"
+      @blur="$v.form.sellPrice.$touch"
+      :error="$v.form.sellPrice.$error"
       type="number"
       float-label="Preço de Venda"
       :decimals="2"
@@ -118,7 +109,6 @@
     <q-input
       class="q-mt-md"
       v-model="form.obs"
-      @keyup.enter="createProduct"
       type="textarea"
       float-label="Observações"
     />
@@ -128,12 +118,11 @@
       :url="url"
       v-model="form.image"
       type="file"
-      float-label="Imagem"
+      float-label="Imagens"
       :auto-expand="true"
-      @add="uploadImage"
-      ref="uploader"
-      :hide-upload-button="true"
-      :hide-upload-progress="true"
+      :upload-factory="uploadImage"
+      hide-upload-progress
+      multiple
     />
     <q-btn
       class="btn-submit float-right"
@@ -171,16 +160,16 @@ export default {
       form: {
         name: '',
         code: '',
-        quantity: '',
+        stockQuantity: '',
         description: '',
         category: '',
         material: '',
         size: '',
         color: '',
         manufacturer: 'IMAB',
-        imageURL: '',
-        cost_price: '',
-        sell_price: '',
+        images: [],
+        costPrice: '',
+        sellPrice: '',
         obs: '',
       },
       url: '',
@@ -213,15 +202,15 @@ export default {
     form: {
       name: { required },
       code: { required },
-      quantity: { required },
+      stockQuantity: { required },
       description: { required },
       category: { required },
       material: { required },
       size: { required },
       color: { required },
       manufacturer: { required },
-      cost_price: { required },
-      sell_price: { required },
+      costPrice: { required },
+      sellPrice: { required },
     },
   },
 
@@ -234,7 +223,6 @@ export default {
         .catch((err) => {
           this.$q.notify({
             message: `Erro obter produto, ${err.message}`,
-            position: 'top',
           });
         });
     }
@@ -247,7 +235,6 @@ export default {
       if (this.$v.form.$error) {
         this.$q.notify({
           message: 'Por favor preencha os campos corretamente.',
-          position: 'top',
         });
         return;
       }
@@ -257,36 +244,38 @@ export default {
           this.$q.notify({
             type: 'positive',
             message: 'Produto criado com sucesso!',
-            color: 'positive',
-            position: 'top',
           });
         })
         .catch((err) => {
           this.$q.notify({
             message: `Erro ao obter produto, ${err.message}`,
-            position: 'top',
           });
         });
     },
 
-    uploadImage() {
-      const file = this.$refs.uploader.files[0];
+    uploadImage(file) {
+      const metadata = { contentType: file.type };
 
-      const metadata = { contentType: 'image/jpeg' };
-
-      this.$storage.ref().child(`images/${Date.now().toString()}`).put(file, metadata)
-        .then((snapshot) => {
-          snapshot.ref.getDownloadURL()
-            .then((downloadURL) => {
-              this.form.imageURL = downloadURL;
+      return new Promise((resolve, reject) => {
+        this.$storage.ref().child(`images/${Date.now().toString()}`).put(file, metadata)
+          .then((snapshot) => {
+            snapshot.ref.getDownloadURL()
+              .then((url) => {
+                this.form.images.push(url);
+                this.$q.notify({
+                  type: 'positive',
+                  message: 'Imagem enviado com sucesso!',
+                });
+                resolve();
+              });
+          })
+          .catch((err) => {
+            this.$q.notify({
+              message: `Erro ao enviar imagem, ${err.message}`,
             });
-        })
-        .catch((err) => {
-          this.$q.notify({
-            message: `Erro ao enviar imagem, ${err.message}`,
-            position: 'top',
+            reject();
           });
-        });
+      });
     },
   },
 };

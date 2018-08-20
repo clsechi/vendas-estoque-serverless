@@ -7,10 +7,17 @@ export default [
       { path: '', component: () => import('pages/index') },
       { path: 'categorias/:id', name: 'categories', component: () => import('pages/common/category') },
       { path: 'produtos/:id', name: 'products', component: () => import('pages/common/product') },
-      { path: 'cart', name: 'cart', component: () => import('pages/common/cart') },
     ],
   },
-
+  {
+    path: '/checkout',
+    component: () => import('layouts/checkout'),
+    children: [
+      { path: 'cart', name: 'cart', component: () => import('pages/checkout/cart') },
+      { path: 'register', name: 'register', component: () => import('pages/checkout/register') },
+      { path: 'confirmation', name: 'confirmation', component: () => import('pages/checkout/confirmation') },
+    ],
+  },
   {
     path: '/admin',
     component: () => import('layouts/admin'),

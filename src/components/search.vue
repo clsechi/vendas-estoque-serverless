@@ -32,7 +32,7 @@ export default {
 
   methods: {
     search(terms, done) {
-      const result = this.products.filter(product => product.name.includes(terms));
+      const result = this.products.filter(product => product.name.match(new RegExp(terms, 'i')));
       // if (result.length === 0) this.$q.notify('Nenhum produto encontrado');
       if (result.length > 0) {
         return done(result.map((res) => {

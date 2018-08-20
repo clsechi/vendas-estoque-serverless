@@ -21,4 +21,7 @@ export default {
 </script>
 
 <style>
+hr {
+  opacity: 0.5;
+}
 </style>

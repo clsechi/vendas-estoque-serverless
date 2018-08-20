@@ -5,17 +5,17 @@
       inline
       class="q-ma-md card">
       <router-link :to="{ name: 'products', params: { id: product.code } }">
-        <q-card-media>
+        <q-card-media class="text-center">
           <custom-image
-            class="card-image"
-            :source="product.imageURL"
+            height="230"
+            :source="product.images[0]"
             :name="product.name"
           />
         </q-card-media>
-        <q-card-main class="q-pb-xs text-center">
+        <q-card-main class="text-center">
           <p class="name">{{ product.name }}</p>
           <p class="for-price text-primary">R$
-            <span class="text-weight-bold price">{{ product.sell_price }},00</span>
+            <span class="text-weight-bold price">{{ product.sellPrice.toFixed(2) }}</span>
           </p>
         </q-card-main>
     </router-link>
@@ -57,15 +57,14 @@ export default {
   font-size: 23px;
 }
 .card {
-  width: 250px;
+  width: 230px;
   height: 340px;
 }
 .card .name {
   font-size: 1.10em;
   height: 30px;
 }
-.card-image {
-  height:230px;
+.custom-image {
   background-color:#fafafa;
 }
 a {

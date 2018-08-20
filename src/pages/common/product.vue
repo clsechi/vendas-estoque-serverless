@@ -18,20 +18,32 @@
     <hr>
     <div class="row q-mt-sm">
       <div class="col-xs-12 col-md-5 text-center">
-        <custom-image
-          class="card-image"
-          :source="product.imageURL"
-          :name="product.name"
-        />
+        <q-carousel
+          class="text-white"
+          arrows
+          infinite
+          quick-nav
+        >
+          <q-carousel-slide
+            v-for="(image, index) in images"
+            :key="index"
+          >
+            <custom-image
+              height="280"
+              :source="image"
+              :name="`product.name - ${index}`"
+            />
+          </q-carousel-slide>
+        </q-carousel>
       </div>
-      <div class="col-xs-12 col-md-7">
+      <div class="col-xs-12 col-md-7 q-mt-sm">
         <span> {{ product.manufacturer }} </span>
-        <p class="q-display-1 text-weight-bolder"> {{ product.name }} </p>
+        <p class="q-display-1 text-weight-bold"> {{ product.name }} </p>
         <p class="text-muted">Cód: {{ product.code }}</p>
-        <div class="row flex-center">
+        <div class="row flex items-center">
           <div class="col-xs-12 col-md-12 text-center">
             <p class="for-price text-primary">R$
-              <span class="text-weight-bold price">{{ product.sell_price }},00</span>
+              <span class="text-weight-bold price">{{ product.sellPrice.toFixed(2) }}</span>
             </p>
           </div>
           <div class="col-xs-12 col-md-12 text-center">
@@ -124,7 +136,7 @@ export default {
 
   data() {
     return {
-      product: '',
+      product: {},
       code: this.$route.params.id,
     };
   },
@@ -145,7 +157,7 @@ export default {
         type: 'positive',
         color: 'positive',
       });
-      this.$router.push('/cart');
+      this.$router.push({ name: 'cart' });
     },
 
     findProduct() {
@@ -156,6 +168,11 @@ export default {
 
   computed: {
     ...mapGetters('product', ['products']),
+
+    images() {
+      if (this.product.images.length === 0) return [null];
+      return this.product.images;
+    },
   },
 
   beforeMount() {
@@ -176,8 +193,5 @@ export default {
 }
 .datasheet-title {
   width: 40%;
-}
-hr {
-  opacity: 0.5;
 }
 </style>
