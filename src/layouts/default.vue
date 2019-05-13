@@ -24,7 +24,7 @@
         <div class="text-center">
           <router-link to="/">
             <img
-              src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"
+              src="/assets/logo.png"
               alt="Estoque do Sechi"
               class="responsive"
               style="width:50%;"
